@@ -1,0 +1,24 @@
+{
+  "name": "node-js-examples",
+  "version": "1.0.0",
+  "description": "examples for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamie-sherriff/nodeJsExamples.git"
+  },
+  "author": "Jamie Sherriff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamie-sherriff/nodeJsExamples/issues"
+  },
+  "homepage": "https://github.com/jamie-sherriff/nodeJsExamples#readme",
+  "dependencies": {
+    "fs-extra": "^2.1.2",
+    "sharp": "^0.17.3",
+    "when": "^3.7.8"
+  }
+}

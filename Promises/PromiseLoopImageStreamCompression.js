@@ -3,9 +3,13 @@ const path = require('path');
 const fsExtra = require('fs-extra');
 const fs = require('fs');
 const when = require('when');
-sharp.cache(false);
-fsExtra.ensureDirSync(path.resolve('pictures'));
+//imagemagik example  .\convert.exe -verbose  -interlace None -size 800x1280 -depth 8 rgba:rawPic2.raw output3.bmp
+//Note that the sampleData file doesn't actully show compression as its already compressed for the sake of putting it in GIT
+//Use a file that is in a raw format
 
+sharp.cache(false);
+const outputDir = path.resolve('..','outputData','pictures');
+fsExtra.ensureDirSync(outputDir);
 console.time("timetaken");
 when.iterate((count) => {
     return count + 1;
@@ -27,11 +31,12 @@ when.iterate((count) => {
 
         let readStream = fs.createReadStream(path.resolve('..', 'sampleData', 'Android_robot.png'));
         // This catches any errors that happen while creating the readable stream (usually invalid names)
-        readStream.on('error', function (err) {
-            console.error(err)
+        readStream.on('error', function (error) {
+            console.error(error);
+            reject(error);
         });
         readStream.on('open', function () {
-            let wstream = fs.createWriteStream(path.resolve('pictures', 'worldLarge' + count + '.jpg'));
+            let wstream = fs.createWriteStream(path.resolve(outputDir, 'coolPic' + count + '.jpg'));
             readStream.on('finish', () => {
                 console.log('read finsihed')
             });
@@ -41,7 +46,6 @@ when.iterate((count) => {
             wstream.on('error', (error) => {
                 console.error('error here' + error);
                 reject('error')
-
             });
             wstream.on("finish", () => {
                 console.log('wstream finished');
